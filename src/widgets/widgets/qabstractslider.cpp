@@ -332,6 +332,8 @@ Qt::Orientation QAbstractSlider::orientation() const
 void QAbstractSlider::setMinimum(int min)
 {
     Q_D(QAbstractSlider);
+    if (min > d->maximum)
+        return;
     setRange(min, qMax(d->maximum, min));
 }
 
@@ -356,6 +358,8 @@ int QAbstractSlider::minimum() const
 void QAbstractSlider::setMaximum(int max)
 {
     Q_D(QAbstractSlider);
+    if (max < d->minimum)
+        return;
     setRange(qMin(d->minimum, max), max);
 }
 
